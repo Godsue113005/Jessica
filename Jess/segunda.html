@@ -1,0 +1,395 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Un pequeño pensamiento</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    overflow-x: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 50px 20px;
+    background:
+        radial-gradient(ellipse at 20% 20%, #fff9ff 0%, transparent 45%),
+        radial-gradient(ellipse at 80% 80%, #e9d9f5 0%, transparent 50%),
+        linear-gradient(135deg, #fdf8ff, #eee1f7, #f9eafa);
+    font-family: 'Cormorant Garamond', serif;
+    color: #715b80;
+    transition: opacity 1s ease, transform 1s ease;
+}
+
+body.leaving {
+    opacity: 0;
+    transform: scale(1.04);
+    pointer-events: none;
+}
+
+.ambient {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.glow {
+    position: absolute;
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    background: rgba(255,255,255,.35);
+    filter: blur(55px);
+    animation: glow 8s ease-in-out infinite alternate;
+}
+
+.glow.one {
+    top: 5%;
+    left: -70px;
+}
+
+.glow.two {
+    bottom: 5%;
+    right: -70px;
+    animation-delay: 3s;
+}
+
+@keyframes glow {
+    from { transform: translate(0, 0) scale(.8); }
+    to { transform: translate(35px, -25px) scale(1.3); }
+}
+
+.decoration {
+    position: fixed;
+    pointer-events: none;
+    z-index: 1;
+    opacity: .65;
+    animation: float 8s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-22px) rotate(12deg); }
+}
+
+.sparkle {
+    position: absolute;
+    color: white;
+    text-shadow: 0 0 12px #c9a9df;
+    animation: twinkle 3s ease-in-out infinite;
+}
+
+@keyframes twinkle {
+    0%, 100% { opacity: .2; transform: scale(.7); }
+    50% { opacity: 1; transform: scale(1.3); }
+}
+
+.petal {
+    position: fixed;
+    top: -30px;
+    width: 13px;
+    height: 19px;
+    border-radius: 80% 10% 80% 10%;
+    background: linear-gradient(135deg, #fff, #e6c9ed);
+    opacity: .65;
+    pointer-events: none;
+    z-index: 1;
+    animation: falling linear infinite;
+}
+
+@keyframes falling {
+    0% {
+        transform: translate3d(0, -5vh, 0) rotate(0deg);
+    }
+    100% {
+        transform: translate3d(100px, 110vh, 0) rotate(600deg);
+    }
+}
+
+.container {
+    position: relative;
+    z-index: 2;
+    width: min(720px, 100%);
+    text-align: center;
+    padding: 55px 35px;
+    border: 1px solid rgba(255,255,255,.7);
+    border-radius: 28px;
+    background: rgba(255,255,255,.30);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 15px 60px rgba(128, 91, 150, .12);
+    animation: appear 1.8s ease both;
+}
+
+@keyframes appear {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.small-title {
+    font-family: 'Dancing Script', cursive;
+    font-size: 25px;
+    color: #b18bc3;
+    margin-bottom: 22px;
+}
+
+h1 {
+    font-family: 'Dancing Script', cursive;
+    font-weight: 500;
+    font-size: clamp(42px, 8vw, 66px);
+    line-height: 1.15;
+    margin-bottom: 25px;
+    background: linear-gradient(90deg, #9470aa, #d39bc3, #a58acb);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+.message {
+    font-size: clamp(20px, 4vw, 25px);
+    line-height: 1.8;
+    color: #796786;
+}
+
+.message .highlight {
+    color: #b17da9;
+    font-style: italic;
+    font-weight: 600;
+}
+
+.message .soft {
+    color: #a18bb8;
+    font-style: italic;
+}
+
+.separator {
+    margin: 30px auto;
+    color: #c49bcf;
+    letter-spacing: 12px;
+    font-size: 21px;
+}
+
+.signature {
+    font-family: 'Dancing Script', cursive;
+    font-size: 30px;
+    color: #a77eae;
+    margin-top: 24px;
+}
+
+.back-button {
+    margin-top: 35px;
+    display: inline-block;
+    padding: 12px 28px;
+    border: 1px solid rgba(171, 135, 190, .4);
+    border-radius: 30px;
+    color: #9877a8;
+    text-decoration: none;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 19px;
+    cursor: pointer;
+    transition: .4s ease;
+    background: rgba(255,255,255,.25);
+}
+
+.back-button:hover {
+    background: rgba(255,255,255,.7);
+    box-shadow: 0 0 25px rgba(190, 150, 210, .25);
+    transform: translateY(-3px);
+}
+
+.music-control {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    z-index: 5;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,.8);
+    background: rgba(255,255,255,.55);
+    color: #9877a8;
+    font-size: 23px;
+    cursor: pointer;
+    box-shadow: 0 4px 20px rgba(130, 95, 150, .15);
+    transition: .3s;
+}
+
+.music-control:hover {
+    transform: scale(1.1);
+    background: white;
+}
+
+@media(max-width: 500px) {
+    .container {
+        padding: 40px 22px;
+    }
+
+    .music-control {
+        bottom: 15px;
+        right: 15px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="ambient">
+    <div class="glow one"></div>
+    <div class="glow two"></div>
+</div>
+
+<div class="container">
+
+    <div class="small-title">Un pequeño pensamiento...</div>
+
+    <h1>Hay cosas bonitas</h1>
+
+    <div class="message">
+        Que aparecen sin buscarlas,
+        que llegan de una manera inesperada
+        y que poco a poco se convierten
+        en algo <span class="highlight">especial.</span>
+
+        <br><br>
+
+        A veces, los detalles más pequeños
+        son los que terminan dejando
+        los recuerdos más <span class="soft">bonitos.</span>
+
+        <br><br>
+
+        Y quizás, entre tantas casualidades,
+        hay algunas que simplemente
+        vale la pena apreciar.
+    </div>
+
+    <div class="separator">✧ · ♡ · ✧</div>
+
+    <div class="signature">Con mucho cariño...</div>
+
+    <button class="back-button" id="goThirdPage" type="button">
+        ¿Quieres saber algo más?
+    </button>
+
+</div>
+
+<button class="music-control" id="musicButton" type="button">♫</button>
+
+<audio id="music" loop preload="auto">
+    <source src="./Violin.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+const music = document.getElementById("music");
+const musicButton = document.getElementById("musicButton");
+const goThirdPage = document.getElementById("goThirdPage");
+
+music.volume = 0.35;
+
+// Recuperar la posición de la música
+const savedTime = sessionStorage.getItem("musicTime");
+const wasPlaying = sessionStorage.getItem("musicPlaying") === "true";
+
+if (savedTime !== null) {
+    music.addEventListener("loadedmetadata", () => {
+        if (Number.isFinite(music.duration)) {
+            music.currentTime = Math.min(
+                Number(savedTime),
+                Math.max(0, music.duration - 0.1)
+            );
+        }
+    }, { once: true });
+}
+
+// Intentar continuar la reproducción
+if (wasPlaying) {
+    music.play().then(() => {
+        musicButton.textContent = "♫";
+    }).catch(() => {
+        musicButton.textContent = "♪";
+    });
+}
+
+// Control de música
+musicButton.addEventListener("click", async () => {
+    if (music.paused) {
+        try {
+            await music.play();
+            musicButton.textContent = "♫";
+            sessionStorage.setItem("musicPlaying", "true");
+        } catch (error) {
+            console.error("No se pudo reproducir la música:", error);
+        }
+    } else {
+        music.pause();
+        musicButton.textContent = "♪";
+        sessionStorage.setItem("musicPlaying", "false");
+    }
+});
+
+// Navegación a la tercera página
+goThirdPage.addEventListener("click", () => {
+
+    sessionStorage.setItem("musicTime", music.currentTime);
+    sessionStorage.setItem("musicPlaying", String(!music.paused));
+
+    document.body.classList.add("leaving");
+
+    setTimeout(() => {
+        window.location.href = "./Tercera.html";
+    }, 900);
+
+});
+
+// Pétalos flotantes
+for (let i = 0; i < 18; i++) {
+    const petal = document.createElement("div");
+    petal.className = "petal";
+    petal.style.left = Math.random() * 100 + "vw";
+    petal.style.animationDuration = (8 + Math.random() * 12) + "s";
+    petal.style.animationDelay = (Math.random() * 12) + "s";
+    petal.style.opacity = 0.2 + Math.random() * 0.6;
+    document.body.appendChild(petal);
+}
+
+// Destellos decorativos
+for (let i = 0; i < 22; i++) {
+    const sparkle = document.createElement("div");
+    sparkle.className = "decoration sparkle";
+    sparkle.textContent = "✧";
+    sparkle.style.left = Math.random() * 100 + "vw";
+    sparkle.style.top = Math.random() * 100 + "vh";
+    sparkle.style.fontSize = (10 + Math.random() * 15) + "px";
+    sparkle.style.animationDelay = Math.random() * 4 + "s";
+    document.body.appendChild(sparkle);
+}
+
+// Corazones sutiles
+for (let i = 0; i < 9; i++) {
+    const heart = document.createElement("div");
+    heart.className = "decoration";
+    heart.textContent = "♡";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.top = Math.random() * 100 + "vh";
+    heart.style.fontSize = (17 + Math.random() * 17) + "px";
+    heart.style.color = "#d5b3d9";
+    heart.style.animationDelay = Math.random() * 5 + "s";
+    document.body.appendChild(heart);
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,378 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lo que quiero decirte</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    padding: 55px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow-x: hidden;
+    position: relative;
+    background:
+        radial-gradient(ellipse at 15% 15%, #fffaff, transparent 45%),
+        radial-gradient(ellipse at 85% 85%, #e8d9f2, transparent 50%),
+        linear-gradient(135deg, #fdf8ff, #eee1f7, #f9eafa);
+    font-family: 'Cormorant Garamond', serif;
+    color: #796786;
+    transition: opacity 1s ease, transform 1s ease;
+}
+
+body.leaving {
+    opacity: 0;
+    transform: scale(1.03);
+}
+
+.ambient {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.glow {
+    position: absolute;
+    width: 260px;
+    height: 260px;
+    border-radius: 50%;
+    background: rgba(255,255,255,.4);
+    filter: blur(65px);
+    animation: glow 9s ease-in-out infinite alternate;
+}
+
+.glow.one {
+    top: 5%;
+    left: -80px;
+}
+
+.glow.two {
+    bottom: 5%;
+    right: -80px;
+    animation-delay: 3s;
+}
+
+@keyframes glow {
+    from { transform: translate(0, 0) scale(.8); }
+    to { transform: translate(35px, -25px) scale(1.3); }
+}
+
+.container {
+    width: min(760px, 100%);
+    position: relative;
+    z-index: 2;
+    padding: 48px 42px;
+    text-align: center;
+    border: 1px solid rgba(255,255,255,.75);
+    border-radius: 28px;
+    background: rgba(255,255,255,.34);
+    backdrop-filter: blur(14px);
+    box-shadow: 0 15px 60px rgba(128,91,150,.12);
+    animation: appear 1.8s ease both;
+}
+
+@keyframes appear {
+    from { opacity: 0; transform: translateY(25px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.eyebrow {
+    font-family: 'Dancing Script', cursive;
+    font-size: 23px;
+    color: #b18bc3;
+    margin-bottom: 13px;
+}
+
+h1 {
+    font-family: 'Dancing Script', cursive;
+    font-weight: 500;
+    font-size: clamp(37px, 7vw, 53px);
+    line-height: 1.2;
+    margin-bottom: 27px;
+    background: linear-gradient(90deg, #9470aa, #d39bc3, #a58acb);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+.message {
+    max-width: 630px;
+    margin: auto;
+    font-size: clamp(17px, 3.2vw, 21px);
+    line-height: 1.85;
+    color: #786984;
+    font-weight: 400;
+}
+
+.message p {
+    margin-bottom: 19px;
+}
+
+.highlight {
+    color: #ad7fae;
+    font-style: italic;
+    font-weight: 600;
+}
+
+.soft {
+    color: #9b83b5;
+    font-style: italic;
+}
+
+.separator {
+    margin: 26px auto;
+    color: #c49bcf;
+    font-size: 20px;
+    letter-spacing: 10px;
+}
+
+.signature {
+    font-family: 'Dancing Script', cursive;
+    font-size: 27px;
+    color: #a77eae;
+    margin-top: 8px;
+}
+
+.back-button {
+    display: inline-block;
+    margin-top: 30px;
+    padding: 10px 25px;
+    border: 1px solid rgba(171,135,190,.4);
+    border-radius: 30px;
+    background: rgba(255,255,255,.25);
+    color: #9877a8;
+    text-decoration: none;
+    font-size: 17px;
+    transition: .4s ease;
+}
+
+.back-button:hover {
+    background: rgba(255,255,255,.75);
+    box-shadow: 0 0 25px rgba(190,150,210,.25);
+    transform: translateY(-3px);
+}
+
+.petal {
+    position: fixed;
+    top: -30px;
+    width: 12px;
+    height: 18px;
+    border-radius: 80% 10% 80% 10%;
+    background: linear-gradient(135deg, #fff, #e6c9ed);
+    opacity: .65;
+    pointer-events: none;
+    z-index: 1;
+    animation: falling linear infinite;
+}
+
+@keyframes falling {
+    from { transform: translate3d(0, -5vh, 0) rotate(0deg); }
+    to { transform: translate3d(100px, 110vh, 0) rotate(600deg); }
+}
+
+.sparkle {
+    position: fixed;
+    color: white;
+    text-shadow: 0 0 12px #c9a9df;
+    pointer-events: none;
+    z-index: 1;
+    animation: twinkle 3s ease-in-out infinite;
+}
+
+@keyframes twinkle {
+    0%, 100% { opacity: .2; transform: scale(.7); }
+    50% { opacity: 1; transform: scale(1.3); }
+}
+
+.music-control {
+    position: fixed;
+    bottom: 23px;
+    right: 23px;
+    z-index: 5;
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,.8);
+    background: rgba(255,255,255,.6);
+    color: #9877a8;
+    font-size: 22px;
+    cursor: pointer;
+    box-shadow: 0 4px 20px rgba(130,95,150,.15);
+    transition: .3s;
+}
+
+.music-control:hover {
+    transform: scale(1.1);
+    background: white;
+}
+
+@media(max-width: 550px) {
+    .container {
+        padding: 37px 23px;
+    }
+
+    .message {
+        line-height: 1.75;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="ambient">
+    <div class="glow one"></div>
+    <div class="glow two"></div>
+</div>
+
+<main class="container">
+
+    <div class="eyebrow">Hay algo que quiero decirte...</div>
+
+    <h1>Lo que realmente siento</h1>
+
+    <div class="message">
+
+        <p>
+            Desde que te conocí, mis sentimientos por ti no han dejado de ser los mismos.
+            Sé que he cometido errores y que quizás algunas de mis actitudes te han hecho
+            dudar de lo que realmente quiero. También sé que me has dejado claro que la
+            ambigüedad es algo que no te gusta, y sinceramente, <span class="highlight">lo lamento.</span>
+        </p>
+
+        <p>
+            Quiero darte lo mejor de mí y demostrarte, no solamente con palabras, sino
+            también con hechos, que lo que siento por ti es sincero y que mis intenciones
+            no son ambiguas. Me gustaría estar a tu lado, siempre que las circunstancias
+            lo permitan y que tú también quieras darme esa oportunidad.
+        </p>
+
+        <p>
+            Quiero aprender a ser más maduro, más consciente y más racional contigo.
+            Que podamos entendernos, escucharnos y encontrar tranquilidad el uno en el
+            otro. Me gustaría que, poco a poco, pudiéramos construir una etapa bonita,
+            donde ambos disfrutemos de estar juntos, nos hagamos felices y podamos
+            sentirnos en paz.
+        </p>
+
+        <p>
+            No quiero adelantarme a los acontecimientos ni llenarte de promesas que
+            todavía tengo que demostrar. Prefiero que el tiempo y mis acciones hablen
+            por mí, porque <span class="highlight">quiero que puedas sentir seguridad en lo que hago,
+            no solamente escuchar lo que digo.</span>
+        </p>
+
+    </div>
+
+    <div class="separator">✧ · ♡ · ✧</div>
+
+    <div class="signature">Con cariño, siempre.</div>
+
+    <a href="segunda.html" class="back-button" id="backButton">
+        Volver
+    </a>
+
+</main>
+
+<button class="music-control" id="musicButton" type="button">♫</button>
+
+<audio id="music" loop preload="auto">
+    <source src="./Violin.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+const music = document.getElementById("music");
+const musicButton = document.getElementById("musicButton");
+
+music.volume = 0.35;
+
+const savedTime = sessionStorage.getItem("musicTime");
+const wasPlaying = sessionStorage.getItem("musicPlaying") === "true";
+
+if (savedTime) {
+    music.addEventListener("loadedmetadata", () => {
+        if (Number.isFinite(music.duration)) {
+            music.currentTime = Math.min(
+                Number(savedTime),
+                Math.max(0, music.duration - 0.1)
+            );
+        }
+    }, { once: true });
+}
+
+if (wasPlaying) {
+    music.play().then(() => {
+        musicButton.textContent = "♫";
+    }).catch(() => {
+        musicButton.textContent = "♪";
+    });
+}
+
+musicButton.addEventListener("click", async () => {
+    if (music.paused) {
+        try {
+            await music.play();
+            musicButton.textContent = "♫";
+            sessionStorage.setItem("musicPlaying", "true");
+        } catch (error) {
+            console.error("No se pudo reproducir la música:", error);
+        }
+    } else {
+        music.pause();
+        musicButton.textContent = "♪";
+        sessionStorage.setItem("musicPlaying", "false");
+    }
+});
+
+document.getElementById("backButton").addEventListener("click", (event) => {
+    event.preventDefault();
+
+    sessionStorage.setItem("musicTime", music.currentTime);
+    sessionStorage.setItem("musicPlaying", !music.paused);
+
+    document.body.classList.add("leaving");
+
+    setTimeout(() => {
+        window.location.href = "segunda.html";
+    }, 900);
+});
+
+// Pétalos flotantes
+for (let i = 0; i < 16; i++) {
+    const petal = document.createElement("div");
+    petal.className = "petal";
+    petal.style.left = Math.random() * 100 + "vw";
+    petal.style.animationDuration = (9 + Math.random() * 12) + "s";
+    petal.style.animationDelay = (Math.random() * 12) + "s";
+    document.body.appendChild(petal);
+}
+
+// Destellos
+for (let i = 0; i < 22; i++) {
+    const sparkle = document.createElement("div");
+    sparkle.className = "sparkle";
+    sparkle.textContent = "✧";
+    sparkle.style.left = Math.random() * 100 + "vw";
+    sparkle.style.top = Math.random() * 100 + "vh";
+    sparkle.style.fontSize = (10 + Math.random() * 15) + "px";
+    sparkle.style.animationDelay = Math.random() * 4 + "s";
+    document.body.appendChild(sparkle);
+}
+</script>
+
+</body>
+</html>
